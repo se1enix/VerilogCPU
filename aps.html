@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)https://courses.fit.cvut.cz/BI-APS/projects/01/index.html -->
+<html class="js"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="./aps_files/screen.css" type="text/css" media="screen">
+  <link rel="stylesheet" href="./aps_files/print.css" type="text/css" media="print">
+  <link rel="stylesheet" href="./aps_files/katex.min.css">
+      <title>Semestrální práce č.1: Návrh mikroarchitektury jednocyklového procesoru • BI-APS • FIT ČVUT Course Pages</title>
+      <script src="./aps_files/main.js"></script>
+<style>[_nghost-ng-c2697620354]{font-family:Open Sans,sans-serif;color:#121212}</style></head>
+  <body wotdisconnected="true"><span id="warning-container"></span>
+<div class="wrap">
+  <div class="menubar app-menu" role="menubar">
+    <ul>
+      <!-- <li><a href="#">
+        <span class="label">Notifications</span>
+      </a></li> -->
+      <li class="user dropdown hidden" id="userbar">
+        <span class="label">Přihlášen uživatel</span>
+        <a class="username" id="username" href="https://courses.fit.cvut.cz/BI-APS/projects/01/index.html#">volovmyk</a>
+        <span class="icon icon-expand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="expand" width="50" height="50" fill="none"></rect><path d="M10 20.25l15.105 9.5L40 20.25" fill="none" stroke="#000" stroke-width="3"></path></svg></span>
+        <ul>
+          <li>
+            <form method="POST" action="https://courses.fit.cvut.cz/_oauth/logout">
+              <button class="link">Odhlásit se</button>
+            </form>
+          </li>
+        </ul>
+      </li>
+      <li class="user" id="login-link">
+        <form method="POST" action="https://courses.fit.cvut.cz/_oauth/login">
+          <button class="link">Přihlásit se</button>
+        </form>
+      </li>
+    </ul>
+  </div>
+  <div class="header">
+    <div class="subheading subheading-portal">
+      <a href="https://courses.fit.cvut.cz/">FIT ČVUT Course Pages</a>
+    </div>
+    <div class="heading-group">
+      <div class="course-heading">
+        BI-APS
+        <span class="dash">—</span>
+        <span class="fullname">Architektury počítačových systémů</span>
+      </div>
+      <div class="menubar page-menu">
+        <ul>
+          <li class="course-semester">
+            <a href="https://courses.fit.cvut.cz/BI-APS/projects/01/index.html#">
+              <span class="icon icon-history"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="history" width="50" height="50" fill="none"></rect><path d="M10.861 10.861A19.934 19.934 0 0 1 25 5c11.038 0 20 8.962 20 20s-8.962 20-20 20S5 36.038 5 25" fill="none" stroke="#000" stroke-width="3"></path><path d="M10 5v7h7M20 33l6-5V15" fill="none" stroke="#000" stroke-width="3"></path></svg></span>&nbsp;<span class="label">Minulé semestry</span><span class="icon icon-expand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="expand" width="50" height="50" fill="none"></rect><path d="M10 20.25l15.105 9.5L40 20.25" fill="none" stroke="#000" stroke-width="3"></path></svg></span>
+            </a>
+            <ul id="semesters"><li><a href="https://courses.fit.cvut.cz/BI-APS/@B101/">B101</a></li>
+<li><a href="https://courses.fit.cvut.cz/BI-APS/@B111/">B111</a></li>
+<li><a href="https://courses.fit.cvut.cz/BI-APS/@B121/">B121</a></li>
+<li><a href="https://courses.fit.cvut.cz/BI-APS/@B122/">B122</a></li>
+<li><a href="https://courses.fit.cvut.cz/BI-APS/@B131/">B131</a></li>
+<li><a href="https://courses.fit.cvut.cz/BI-APS/@B141/">B141</a></li>
+<li><a href="https://courses.fit.cvut.cz/BI-APS/@B151/">B151</a></li>
+<li><a href="https://courses.fit.cvut.cz/BI-APS/@B152/">B152</a></li>
+<li><a href="https://courses.fit.cvut.cz/BI-APS/@B161/">B161</a></li>
+<li><a href="https://courses.fit.cvut.cz/BI-APS/@B171/">B171</a></li>
+<li><a href="https://courses.fit.cvut.cz/BI-APS/@B181/">B181</a></li>
+<li><a href="https://courses.fit.cvut.cz/BI-APS/@B191/">B191</a></li>
+<li><a href="https://courses.fit.cvut.cz/BI-APS/@B201/">B201</a></li>
+<li><a href="https://courses.fit.cvut.cz/BI-APS/@B211/">B211</a></li>
+<li><a href="https://courses.fit.cvut.cz/BI-APS/@B221/">B221</a></li>
+<li><a href="https://courses.fit.cvut.cz/BI-APS/@B231/">B231</a></li>
+<li><a href="https://courses.fit.cvut.cz/BI-APS/">master</a></li></ul>
+          </li>
+          <li><a href="https://gitlab.fit.cvut.cz/BI-APS/bi-aps/blob/master/projects/01/index.adoc">
+            <span class="icon icon-gitlab"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="gitlab" width="50" height="50" fill="none"></rect><path d="M13.072 7.623l4.843 13.933 13.992-.178 4.486-14.052 7.651 20.894-18.863 14.454L5.956 28.706l7.116-21.083z" fill="none" stroke="#000" stroke-width="3"></path></svg></span>&nbsp;<span class="label">Zobrazit na GitLabu</span>
+          </a></li>
+          <li><a href="https://gitlab.fit.cvut.cz/BI-APS/bi-aps/issues/new?issue[title]=projects/01/index.adoc:%20">
+            <span class="icon icon-danger"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="danger" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M25 13.56v12.403M25 35.56v.88"></path></g><circle cx="25" cy="25" r="20" fill="none" stroke="#000" stroke-width="3"></circle></svg></span>&nbsp;<span class="label">Nahlásit chybu na této stránce</span>
+          </a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="horizont">
+    <main>
+      <div class="display-menu">
+      </div>
+      <a href="https://courses.fit.cvut.cz/BI-APS/projects/01/index.html#nav" class="nav-link">Jdi na navigaci předmětu</a>
+        <h1>Semestrální práce č.1: Návrh mikroarchitektury jednocyklového procesoru</h1>
+      <section class="doc-section level-1"><h2 id="_semestrální-práce-č-1-návrh-mikroarchitektury-jednocyklového-procesoru"><a class="anchor" href="https://courses.fit.cvut.cz/BI-APS/projects/01/index.html#_semestr%C3%A1ln%C3%AD-pr%C3%A1ce-%C4%8D-1-n%C3%A1vrh-mikroarchitektury-jednocyklov%C3%A9ho-procesoru" aria-hidden="true"></a>Semestrální práce č.1: Návrh mikroarchitektury jednocyklového procesoru</h2><section class="doc-section level-3"><h4 id="_návrh-základní-mikroarchitektury"><a class="anchor" href="https://courses.fit.cvut.cz/BI-APS/projects/01/index.html#_n%C3%A1vrh-z%C3%A1kladn%C3%AD-mikroarchitektury" aria-hidden="true"></a>Návrh základní mikroarchitektury</h4><p>Navrhněte a popište v jazyce Verilog mikroarchitekturu jednocyklového 32-bitového procesoru, jehož ISA obsahuje instrukce uvedené v tabulce níže. Procesor po resetu začne vykonávat instrukce od adresy 0x00000000.  Procesor je připojený k instrukční a datové paměti dle obrázku:</p>
+<div class="image-block"><img src="./aps_files/cpu.png" alt="cpu" width="500"></div>
+<div class="table-block"><table class="frame-all grid-all"><colgroup><col><col><col><col></colgroup><tbody><tr><th class="halign-left valign-top">Instrukce</th><th class="halign-left valign-top">Syntax</th><th class="halign-left valign-top">Operace</th><th class="halign-left valign-top">Poznámka</th></tr><tr><td class="halign-left valign-top">add</td><td class="halign-left valign-top">add rd, rs1, rs2</td><td class="halign-left valign-top">rd ← [rs1] + [rs2];</td><td class="halign-left valign-top"></td></tr><tr><td class="halign-left valign-top">addi</td><td class="halign-left valign-top">addi rd, rs1, imm<sub>11:0</sub></td><td class="halign-left valign-top">rd ← [rs1] + imm<sub>11:0</sub>;</td><td class="halign-left valign-top"></td></tr><tr><td class="halign-left valign-top">and</td><td class="halign-left valign-top">and rd, rs1, rs2</td><td class="halign-left valign-top">rd ← [rs1] &amp; [rs2];</td><td class="halign-left valign-top"></td></tr><tr><td class="halign-left valign-top">sub</td><td class="halign-left valign-top">sub rd, rs1, rs2</td><td class="halign-left valign-top">rd ← [rs1] - [rs2];</td><td class="halign-left valign-top"></td></tr><tr><td class="halign-left valign-top">srl</td><td class="halign-left valign-top">srl rd, rs1, rs2</td><td class="halign-left valign-top">rd ← (unsigned)[rs1] &gt;&gt; [rs2];</td><td class="halign-left valign-top"></td></tr><tr><td class="halign-left valign-top">beq</td><td class="halign-left valign-top">beq rs1, rs2, imm<sub>12:1</sub></td><td class="halign-left valign-top">if [rs1] == [rs2] go to [PC]+{imm<sub>12:1</sub>,'0'}; else go to [PC]+4;</td><td class="halign-left valign-top"></td></tr><tr><td class="halign-left valign-top">blt</td><td class="halign-left valign-top">blt rs1, rs2, imm<sub>12:1</sub></td><td class="halign-left valign-top">if [rs1] &lt; [rs2] go to [PC]+{imm<sub>12:1</sub>,'0'}; else go to [PC]+4;</td><td class="halign-left valign-top">signed comparison</td></tr><tr><td class="halign-left valign-top">lw</td><td class="halign-left valign-top">lw rd,imm<sub>11:0</sub>(rs1)</td><td class="halign-left valign-top">rd ← Memory[[rs1] + imm<sub>11:0</sub>]</td><td class="halign-left valign-top"></td></tr><tr><td class="halign-left valign-top">sw</td><td class="halign-left valign-top">sw rs2,imm<sub>11:0</sub>(rs1)</td><td class="halign-left valign-top">Memory[[rs1] + imm<sub>11:0</sub>] ← [rs2];</td><td class="halign-left valign-top"></td></tr><tr><td class="halign-left valign-top">lui</td><td class="halign-left valign-top">lui rd, imm<sub>31:12</sub></td><td class="halign-left valign-top">rd ← {imm<sub>31:12</sub>,'0000 0000 0000'};</td><td class="halign-left valign-top"></td></tr><tr><td class="halign-left valign-top">jal</td><td class="halign-left valign-top">jal rd, imm<sub>20:1</sub></td><td class="halign-left valign-top">rd ← [PC]+4; go to [PC] +{imm<sub>20:1</sub>,'0'};</td><td class="halign-left valign-top"></td></tr><tr><td class="halign-left valign-top">jalr</td><td class="halign-left valign-top">jalr rd, rs1, imm<sub>11:0</sub></td><td class="halign-left valign-top">rd ← [PC]+4; go to [rs1]+imm<sub>11:0</sub>;</td><td class="halign-left valign-top"></td></tr></tbody></table></div></section>
+<section class="doc-section level-3"><h4 id="_návrh-rozšířené-mikroarchitektury"><a class="anchor" href="https://courses.fit.cvut.cz/BI-APS/projects/01/index.html#_n%C3%A1vrh-roz%C5%A1%C3%AD%C5%99en%C3%A9-mikroarchitektury" aria-hidden="true"></a>Návrh rozšířené mikroarchitektury</h4><p>Přidejte do ISA procesoru implementaci následující instrukci: floor_log.</p>
+<div class="table-block"><table class="frame-all grid-all"><colgroup><col><col><col><col></colgroup><tbody><tr><th class="halign-left valign-top">Instrukce</th><th class="halign-left valign-top">Syntax</th><th class="halign-left valign-top">Operace</th><th class="halign-left valign-top">Poznámka</th></tr><tr><td class="halign-left valign-top">floor_log</td><td class="halign-left valign-top">floor_log rd, rs1</td><td class="halign-left valign-top">rd ← (int)floor(log<sub>2</sub>(rs1));</td><td class="halign-left valign-top">Obsah registru rs1 je chápán jako nenulový kladný 32-bitový float v normalizovaném tvaru. Obsah registru rd je chápán jako celé číslo v dvojkovém doplňku. floor() je funkce, která vrací dolní zaokrouhlení daného čísla. log<sub>2</sub>() je dvojkový logaritmus.</td></tr></tbody></table></div>
+<p><strong>Kódování instrukcí:</strong></p>
+<p>Instrukce jsou kódovány na 32 bitů (v tabulce od msb k lsb), přičemž hodnoty rs1, rs2 a rd jsou kódovány na 5 bitů. Poslední sloupec tabulky je operační kód dané instrukce. Kódování instrukcí odpovídá specifikaci RISC-V, přesněji RV32I. Instrukce floor_log není součástí RV32I a tedy při jejím použití je nutno se postarat o její zakódování do strojového kódu.</p>
+<div class="table-block"><table class="frame-all grid-all stretch"><colgroup><col style="width: 9.1743%;"><col style="width: 20.1834%;"><col style="width: 13.7614%;"><col style="width: 13.7614%;"><col style="width: 9.1743%;"><col style="width: 13.7614%;"><col style="width: 20.1838%;"></colgroup><tbody><tr><td class="halign-left valign-top">add:</td><td class="halign-center valign-top">0000000</td><td class="halign-center valign-top">rs2</td><td class="halign-center valign-top">rs1</td><td class="halign-center valign-top">000</td><td class="halign-center valign-top">rd</td><td class="halign-center valign-top">0110011</td></tr><tr><td class="halign-left valign-top">addi</td><td class="halign-center valign-top" colspan="2">imm[11:0]</td><td class="halign-center valign-top">rs1</td><td class="halign-center valign-top">000</td><td class="halign-center valign-top">rd</td><td class="halign-center valign-top">0010011</td></tr><tr><td class="halign-left valign-top">and:</td><td class="halign-center valign-top">0000000</td><td class="halign-center valign-top">rs2</td><td class="halign-center valign-top">rs1</td><td class="halign-center valign-top">111</td><td class="halign-center valign-top">rd</td><td class="halign-center valign-top">0110011</td></tr><tr><td class="halign-left valign-top">sub:</td><td class="halign-center valign-top">0100000</td><td class="halign-center valign-top">rs2</td><td class="halign-center valign-top">rs1</td><td class="halign-center valign-top">000</td><td class="halign-center valign-top">rd</td><td class="halign-center valign-top">0110011</td></tr><tr><td class="halign-left valign-top">srl:</td><td class="halign-center valign-top">0000000</td><td class="halign-center valign-top">rs2</td><td class="halign-center valign-top">rs1</td><td class="halign-center valign-top">101</td><td class="halign-center valign-top">rd</td><td class="halign-center valign-top">0110011</td></tr><tr><td class="halign-left valign-top">beq:</td><td class="halign-center valign-top">imm[12|10:5]</td><td class="halign-center valign-top">rs2</td><td class="halign-center valign-top">rs1</td><td class="halign-center valign-top">000</td><td class="halign-center valign-top">imm[4:1|11]</td><td class="halign-center valign-top">1100011</td></tr><tr><td class="halign-left valign-top">blt:</td><td class="halign-center valign-top">imm[12|10:5]</td><td class="halign-center valign-top">rs2</td><td class="halign-center valign-top">rs1</td><td class="halign-center valign-top">100</td><td class="halign-center valign-top">imm[4:1|11]</td><td class="halign-center valign-top">1100011</td></tr><tr><td class="halign-left valign-top">lw:</td><td class="halign-center valign-top" colspan="2">imm[11:0]</td><td class="halign-center valign-top">rs1</td><td class="halign-center valign-top">010</td><td class="halign-center valign-top">rd</td><td class="halign-center valign-top">0000011</td></tr><tr><td class="halign-left valign-top">sw:</td><td class="halign-center valign-top">imm[11:5]</td><td class="halign-center valign-top">rs2</td><td class="halign-center valign-top">rs1</td><td class="halign-center valign-top">010</td><td class="halign-center valign-top">imm[4:0]</td><td class="halign-center valign-top">0100011</td></tr><tr><td class="halign-left valign-top">lui:</td><td class="halign-center valign-top" colspan="4">imm[31:12]</td><td class="halign-center valign-top">rd</td><td class="halign-center valign-top">0110111</td></tr><tr><td class="halign-left valign-top">jal:</td><td class="halign-center valign-top" colspan="4">imm[20|10:1|11|19:12]</td><td class="halign-center valign-top">rd</td><td class="halign-center valign-top">1101111</td></tr><tr><td class="halign-left valign-top">jalr:</td><td class="halign-center valign-top" colspan="2">imm[11:0]</td><td class="halign-center valign-top">rs1</td><td class="halign-center valign-top">000</td><td class="halign-center valign-top">rd</td><td class="halign-center valign-top">1100111</td></tr><tr><td class="halign-left valign-top">floor_log:</td><td class="halign-center valign-top" colspan="2">000000000000</td><td class="halign-center valign-top">rs1</td><td class="halign-center valign-top">000</td><td class="halign-center valign-top">rd</td><td class="halign-center valign-top">0001011</td></tr></tbody></table></div></section>
+<section class="doc-section level-3"><h4 id="_program-s"><a class="anchor" href="https://courses.fit.cvut.cz/BI-APS/projects/01/index.html#_program-s" aria-hidden="true"></a>Program S</h4><p>V datové paměti je uloženo pole kladných 32-bitových čísel v plovoucí řádové čárce v jednoduché přesnosti (IEEE-754) v normalizovaném tvaru představující výsledek měření nějaké fyzikální veličiny (například intenzita osvětlení nějaké scény). Tyto data chceme prezentovat uživateli jemu přirozenou formou (například zobrazit na display). Nicméně, mění-li se fyzikální podněty působící na lidské smysly řadou geometrickou, vnímá člověk jejich změnu v řadě aritmetické (viz Weberův–Fechnerův zákon). Proto musíme tyto data zpracovat. Pro naše účely bude postačující všechny prvky pole nahradit celočíselnou hodnotou jejich logaritmu.</p>
+<p><strong>Úkol:</strong> Napište rutinu <strong>floor_log</strong>, která přijímá 1 argument (normalizované kladné číslo v plovoucí řádové čárce v jednoduché přesnosti) a vrací celočíselnou hodnotou logaritmu tohoto čísla zaokrouhlenou směrem dolů.  V jazyce C by této rutině odpovídala funkce s následujícím prototypem:</p>
+<div class="listing-block"><pre>int floor_log(float x);</pre></div>
+<p>Rutina tedy pro zadané x&gt;0 spočítá hodnotu floor(log<sub>2</sub>(x)) a tuto hodnotu vrátí jako celé znaménkové 32-bitové číslo v dvojkovém doplňku, přičemž floor() je funkce, která vrací dolní zaokrouhlení daného čísla.</p>
+<p>Tuto rutinu bude nutné <strong>volat</strong> pro kažý prvek pole zvlášť. Používejte volací konvenci RISC-V. Pro volání rutiny používejte instrukci <strong>jal</strong>, pro návrat z ní instrukci <strong>jalr</strong>. Pozor, nepoužívejte pseudoinstrukci call, která se v simulátoru RARS nahradí dvojicí instrukcí auipc a jalr. Pro implementaci rutiny postačují instrukce ze základního návrhu, tzn. není nutné implementovat instrukci floor_log. Pokud máte implementovanou instrukci floor_log, můžete ji v rutině s výhodou použít.</p>
+<p>Předpokládejte, že informace o velikosti pole a jeho počáteční adrese jsou dány fixně na adresách v datové paměti:</p>
+<div class="ulist"><ul><li>0x00000004: velikost pole (počet prvků)</li><li>0x00000008: ukazatel na začátek pole</li></ul></div>
+<p>Tzn. přečtením hodnoty uložené na adrese 0x00000008 získáte adresu, kde začíná první prvek pole. Adresa 0x00000008 tedy není adresou začátku pole.</p>
+<p>Program může modifikovat pouze pole samotné a každý prvek pouze jeden krát.</p>
+<p>Velikost instrukční paměti je omezena na 128 slov, tedy 512 B. Důsledek: program přesahující tuto mez nebude akceptován (nebude produkovat očekávané výsledky).</p>
+<aside class="admonition-block note" role="note"><h6 class="block-title label-only"><span class="title-label">Poznámka: </span></h6><p>Pokud za program dává odevzdávací systém 0 bodů, může to být i chybou v implementaci ISA. Plný počet bodů za implementaci ISA znamená, že jste dostatečně prokázali znalosti Verilogu, ale pokud správný program v asembleru nedává správné výsledky, znamená to, že implementace některé instrukce není úplně korektní.</p></aside></section>
+<section class="doc-section level-2"><h3 id="_hodnocení-semestrální-práce"><a class="anchor" href="https://courses.fit.cvut.cz/BI-APS/projects/01/index.html#_hodnocen%C3%AD-semestr%C3%A1ln%C3%AD-pr%C3%A1ce" aria-hidden="true"></a>Hodnocení semestrální práce</h3><div class="table-block"><table class="frame-all grid-all"><colgroup><col><col></colgroup><tbody><tr><th class="halign-left valign-top">Popis</th><th class="halign-left valign-top">Bodování</th></tr><tr><td class="halign-left valign-top">Základní návrh v jazyce Verilog</td><td class="halign-left valign-top">12</td></tr><tr><td class="halign-left valign-top">Rozšířený návrh v jazyce Verilog:</td><td class="halign-left valign-top">4</td></tr><tr><td class="halign-left valign-top">Program S</td><td class="halign-left valign-top">9</td></tr></tbody></table></div>
+<div class="ulist"><ul><li>Semestrální práce by měla být odevzdána dle harmonogramu v uvedeného v části <a href="https://courses.fit.cvut.cz/BI-APS/@master/classification/index.html">Hodnocení</a>.</li><li>Každý započatý týden zpoždění je penalizován ztrátou dvou bodů.</li><li>Odevzdání po 13. týdnu není možné.</li></ul></div>
+<section class="admonition-block important" role="doc-notice"><h6 class="block-title label-only"><span class="title-label">Důležité: </span></h6><p>Váš program S musí být otestován na Vašem procesoru, jinak se nehodnotí. Jinými slovy, 9 bodů za program S můžete získat pouze tehdy, pokud odevzdáte popis procesoru, na kterém tento program běží a generuje očekávané výsledky. Body za program S můžete získat i tehdy, není-li Váš procesor zcela korektní.</p></section></section>
+<section class="doc-section level-2"><h3 id="_způsob-odevzdání-semestrální-práce"><a class="anchor" href="https://courses.fit.cvut.cz/BI-APS/projects/01/index.html#_zp%C5%AFsob-odevzd%C3%A1n%C3%AD-semestr%C3%A1ln%C3%AD-pr%C3%A1ce" aria-hidden="true"></a>Způsob odevzdání semestrální práce</h3><p>Vaše řešení (zabalené v zip archivu) odevzdejte přes <a class="bare" href="https://biaps.fit.cvut.cz/first/login.php">https://biaps.fit.cvut.cz/first/login.php</a>.
+V případě problémů můžete Vaše řešení poslat na email cvičícího (pokud jste nevyčerpali všechny pokusy).</p>
+<p>CELKEM je na odevzdání semestrální práce k dispozici 10 pokusů. V odevzdávacím systému se uchovává pouze poslední pokus.</p>
+<section class="doc-section level-3"><h4 id="_základní-a-rozšířený-návrh"><a class="anchor" href="https://courses.fit.cvut.cz/BI-APS/projects/01/index.html#_z%C3%A1kladn%C3%AD-a-roz%C5%A1%C3%AD%C5%99en%C3%BD-n%C3%A1vrh" aria-hidden="true"></a>Základní a rozšířený návrh</h4><p>Popis procesoru uložte do jednoho souboru. Název souboru musí být následující: <strong>Prijmeni_Jmeno_CPU.v</strong> (bez diakritiky, čili bez háčků a čárek).
+Všechny moduly, které potřebujete, popište v rámci tohoto souboru.</p>
+<p>Použijte následující šablonu. Názvy vstupů a výstupů neměňte.</p>
+<div class="listing-block"><pre>`default_nettype none
+module processor( input         clk, reset,
+                  output [31:0] PC,
+                  input  [31:0] instruction,
+                  output        WE,
+                  output [31:0] address_to_mem,
+                  output [31:0] data_to_mem,
+                  input  [31:0] data_from_mem
+                );
+    //... write your code here ...
+endmodule
+
+//... add new modules here ...
+`default_nettype wire</pre></div>
+<section class="admonition-block important" role="doc-notice"><h6 class="block-title label-only"><span class="title-label">Důležité: </span></h6><p>Odevzdávejte pouze popis procesoru. Nepřikládejte popis dalších komponent (data memory, instruction memory, etc.).</p></section></section>
+<section class="doc-section level-3"><h4 id="_program-s-2"><a class="anchor" href="https://courses.fit.cvut.cz/BI-APS/projects/01/index.html#_program-s-2" aria-hidden="true"></a>Program S</h4><p>Uložte Váš program S v jazyku symbolických adres do jednoho souboru. Jméno souboru musí být následující: <strong>Prijmeni_Jmeno_prog1.asm</strong> . Program ve strojovém kódu (hexadecimální formát) musí být uložen v dalším souboru, kde každá instrukce začíná na novém řádku. Jméno souboru musí být následující: <strong>Prijmeni_Jmeno_prog1.hex</strong></p>
+<section class="admonition-block important" role="doc-notice"><h6 class="block-title label-only"><span class="title-label">Důležité: </span></h6><p>Všechny 3 odevzdávané soubory zabalte do zip archivu. Nevytvářejte složky a podsložky v tomto archívu. Archiv musí obsahovat POUZE odevzdávané soubory.</p></section></section></section>
+<section class="doc-section level-2"><h3 id="_pomůcka"><a class="anchor" href="https://courses.fit.cvut.cz/BI-APS/projects/01/index.html#_pom%C5%AFcka" aria-hidden="true"></a>Pomůcka</h3><p>Pro vygenerování strojového kódu lze použít simulátor RARS používaný na cvičeních. Je vhodné použít textový formát, kde každá instrukce je uvedena hexadecimálně, samostatně v každém řádku souboru. Postup ilustruje následující obrázek. Pozor, RARS používá instrukční sadu RISC-V, která neimplementuje instrukci adduqb.</p>
+<div class="image-block"><img src="./aps_files/MARS_01.png" alt="MARS 01" width="1005"></div>
+<p>Dále můžete použít následující moduly a modifikovat je dle libosti. Nebudou součástí Vašeho řešení ani je neodevzdávejte.</p>
+<div class="listing-block"><pre>module top (	input         clk, reset,
+		output [31:0] data_to_mem, address_to_mem,
+		output        write_enable);
+
+	wire [31:0] pc, instruction, data_from_mem;
+
+	inst_mem  imem(pc[7:2], instruction);
+	data_mem  dmem(clk, write_enable, address_to_mem, data_to_mem, data_from_mem);
+	processor CPU(clk, reset, pc, instruction, write_enable, address_to_mem, data_to_mem, data_from_mem);
+endmodule
+
+//-------------------------------------------------------------------
+module data_mem (input clk, we,
+		 input  [31:0] address, wd,
+		 output [31:0] rd);
+
+	reg [31:0] RAM[63:0];
+
+	initial begin
+		$readmemh ("memfile_data.hex",RAM,0,63);
+	end
+
+	assign rd=RAM[address[31:2]]; // word aligned
+
+	always @ (posedge clk)
+		if (we)
+			RAM[address[31:2]]&lt;=wd;
+endmodule
+
+//-------------------------------------------------------------------
+module inst_mem (input  [5:0]  address,
+		 output [31:0] rd);
+
+	reg [31:0] RAM[63:0];
+	initial begin
+		$readmemh ("memfile_inst.hex",RAM,0,63);
+	end
+	assign rd=RAM[address]; // word aligned
+endmodule</pre></div>
+<p>Pro simulaci můžete použít následující modul:</p>
+<div class="listing-block"><pre>module testbench();
+	reg         clk;
+	reg         reset;
+	wire [31:0] data_to_mem, address_to_mem;
+	wire        write_enable;
+
+	top simulated_system (clk, reset, data_to_mem, address_to_mem, write_enable);
+
+	initial	begin
+		$dumpfile("test");
+		$dumpvars;
+		reset&lt;=1; # 2; reset&lt;=0;
+		#100;
+		$writememh ("memfile_data_after_simulation.hex",simulated_system.dmem.RAM,0,63);
+		$finish;
+	end
+
+	// generate clock
+	always	begin
+		clk&lt;=1; # 1; clk&lt;=0; # 1;
+	end
+endmodule</pre></div></section></section>
+    </main>
+    <nav class="site-nav" id="nav">
+      <div class="other-version hidden" id="version-msg">
+        <div id="version-msg-history-icon" class="hidden"><span class="icon icon-history"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="history" width="50" height="50" fill="none"></rect><path d="M10.861 10.861A19.934 19.934 0 0 1 25 5c11.038 0 20 8.962 20 20s-8.962 20-20 20S5 36.038 5 25" fill="none" stroke="#000" stroke-width="3"></path><path d="M10 5v7h7M20 33l6-5V15" fill="none" stroke="#000" stroke-width="3"></path></svg></span></div>
+        <div id="version-msg-other-icon" class="hidden"><span class="icon icon-eye"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="eye" width="50" height="50" fill="none"></rect><path d="M5 25s7.103-10 20-10 20 10 20 10-7.476 10-20 10C12.476 35 5 25 5 25z" fill="none" stroke="#000" stroke-width="3"></path><circle cx="25" cy="25" r="6" fill="none" stroke="#000" stroke-width="3"></circle></svg></span></div>
+        Prohlížíte verzi <strong id="version-msg-branch">...</strong>.<br>
+        <a href="https://courses.fit.cvut.cz/BI-APS/">Přejděte na aktuální verzi.</a>
+      </div>
+      <h1>Navigace předmětu</h1>
+      <ul class="link-list">
+        <li class="">
+          <a href="https://courses.fit.cvut.cz/BI-APS/index.html">
+            <span class="icon icon-home"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="home" width="50" height="50" fill="none"></rect><path d="M5 28L25 8l20 20" fill="none" stroke="#000" stroke-width="3"></path><path d="M12 22v20h26V22" fill="none" stroke="#000" stroke-width="3"></path></svg></span> <span class="label">BI-APS</span>
+          </a>
+        </li>
+            <li class="collapsed">
+              <a href="https://courses.fit.cvut.cz/BI-APS/news/index.html">
+                  <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">Aktuality</span>
+              </a>
+            </li>
+            <li class="collapsed">
+              <a href="https://courses.fit.cvut.cz/BI-APS/annotation/index.html">
+                  <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">Anotace</span>
+              </a>
+            </li>
+            <li class="">
+                <a class="expander" aria-hidden="true">
+                  <span class="icon icon-expand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="expand" width="50" height="50" fill="none"></rect><path d="M10 20.25l15.105 9.5L40 20.25" fill="none" stroke="#000" stroke-width="3"></path></svg></span>
+                </a>
+              <a href="https://courses.fit.cvut.cz/BI-APS/tutorials/index.html">
+                  <span class="icon icon-folder"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="folder" width="50" height="50" fill="none"></rect><path d="M3.5 8.66v32.68h43V14.68H25l-4.3-6.02H3.5z" fill="none" stroke="#000" stroke-width="3"></path></svg></span> <span class="label">Cvičení</span>
+              </a>
+                  <ul>
+                        <li class="collapsed">
+                          <a href="https://courses.fit.cvut.cz/BI-APS/tutorials/01/index.html">
+                              <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">1. Vyhodnocování výkonnosti počítače</span>
+                          </a>
+                        </li>
+                        <li class="collapsed">
+                          <a href="https://courses.fit.cvut.cz/BI-APS/tutorials/02/index.html">
+                              <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">2. Verilog jako Jazyk pro popis HW</span>
+                          </a>
+                        </li>
+                        <li class="collapsed">
+                          <a href="https://courses.fit.cvut.cz/BI-APS/tutorials/03/index.html">
+                              <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">3. Základní komponenty RISC procesoru</span>
+                          </a>
+                        </li>
+                        <li class="collapsed">
+                          <a href="https://courses.fit.cvut.cz/BI-APS/tutorials/04/index.html">
+                              <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">4.  ISA a jazyk symbolických adres architektury RISC-V</span>
+                          </a>
+                        </li>
+                        <li class="collapsed">
+                          <a href="https://courses.fit.cvut.cz/BI-APS/tutorials/05/index.html">
+                              <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">5. Programování v JSA (assembleru) RISC-V</span>
+                          </a>
+                        </li>
+                        <li class="collapsed">
+                          <a href="https://courses.fit.cvut.cz/BI-APS/tutorials/06/index.html">
+                              <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">6.  Proudově pracující procesor</span>
+                          </a>
+                        </li>
+                        <li class="collapsed">
+                          <a href="https://courses.fit.cvut.cz/BI-APS/tutorials/07/index.html">
+                              <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">7.  Skrytá paměť z pohledu CPU/assembleru</span>
+                          </a>
+                        </li>
+                        <li class="collapsed">
+                          <a href="https://courses.fit.cvut.cz/BI-APS/tutorials/08/index.html">
+                              <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">8.  Skrytá paměť z pohledu vyššího programovacího jazyka a MMIO</span>
+                          </a>
+                        </li>
+                        <li class="collapsed">
+                          <a href="https://courses.fit.cvut.cz/BI-APS/tutorials/09/index.html">
+                              <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">9. MESI koherenční protokol</span>
+                          </a>
+                        </li>
+                        <li class="collapsed">
+                          <a href="https://courses.fit.cvut.cz/BI-APS/tutorials/10/index.html">
+                              <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">10. Paměťová konzistence a synchronizační primitiva</span>
+                          </a>
+                        </li>
+                        <li class="collapsed">
+                          <a href="https://courses.fit.cvut.cz/BI-APS/tutorials/11/index.html">
+                              <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">11. Paměťová konzistence z pohledu programátora v C/C++</span>
+                          </a>
+                        </li>
+                        <li class="collapsed">
+                          <a href="https://courses.fit.cvut.cz/BI-APS/tutorials/12/index.html">
+                              <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">12. Predikce skoků</span>
+                          </a>
+                        </li>
+                        <li class="collapsed">
+                            <a class="expander" aria-hidden="true">
+                              <span class="icon icon-expand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="expand" width="50" height="50" fill="none"></rect><path d="M10 20.25l15.105 9.5L40 20.25" fill="none" stroke="#000" stroke-width="3"></path></svg></span>
+                            </a>
+                          <a href="https://courses.fit.cvut.cz/BI-APS/tutorials/13/index.html">
+                              <span class="icon icon-folder"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="folder" width="50" height="50" fill="none"></rect><path d="M3.5 8.66v32.68h43V14.68H25l-4.3-6.02H3.5z" fill="none" stroke="#000" stroke-width="3"></path></svg></span> <span class="label">13. Kontrola semestrálních projektů, zápočet</span>
+                          </a>
+                              <ul>
+                                    <li class="collapsed">
+                                      <a href="https://courses.fit.cvut.cz/BI-APS/tutorials/13/how_to.jpg">
+                                          <span class="icon icon-file-image"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-image" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M13.962 38.371l3.787-3.174 4.131 3.174 6.197-6.012 5.508 6.541"></path><circle cx="18.459" cy="26.84" r="2.862"></circle></g></svg></span> <span class="label">How to</span>
+                                      </a>
+                                    </li>
+                                    <li class="collapsed">
+                                      <a href="https://courses.fit.cvut.cz/BI-APS/tutorials/13/software_development.gif">
+                                          <span class="icon icon-file-image"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-image" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M13.962 38.371l3.787-3.174 4.131 3.174 6.197-6.012 5.508 6.541"></path><circle cx="18.459" cy="26.84" r="2.862"></circle></g></svg></span> <span class="label">Software development</span>
+                                      </a>
+                                    </li>
+                              </ul>
+                        </li>
+                  </ul>
+            </li>
+            <li class="collapsed">
+                <a class="expander" aria-hidden="true">
+                  <span class="icon icon-expand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="expand" width="50" height="50" fill="none"></rect><path d="M10 20.25l15.105 9.5L40 20.25" fill="none" stroke="#000" stroke-width="3"></path></svg></span>
+                </a>
+              <a href="https://courses.fit.cvut.cz/BI-APS/classification/index.html">
+                  <span class="icon icon-folder"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="folder" width="50" height="50" fill="none"></rect><path d="M3.5 8.66v32.68h43V14.68H25l-4.3-6.02H3.5z" fill="none" stroke="#000" stroke-width="3"></path></svg></span> <span class="label">Hodnocení</span>
+              </a>
+                  <ul>
+                        <li class="collapsed">
+                          <a href="https://courses.fit.cvut.cz/BI-APS/classification/pozadavky.html">
+                              <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">BI-APS Požadavky ke zkoušce</span>
+                          </a>
+                        </li>
+                  </ul>
+            </li>
+            <li class="collapsed">
+              <a href="https://courses.fit.cvut.cz/BI-APS/parttime/index.html">
+                  <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">Kombinované studium</span>
+              </a>
+            </li>
+            <li class="collapsed">
+              <a href="https://courses.fit.cvut.cz/BI-APS/lectures/index.html">
+                  <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">Přednášky</span>
+              </a>
+            </li>
+            <li class="">
+                <a class="expander" aria-hidden="true">
+                  <span class="icon icon-expand"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="expand" width="50" height="50" fill="none"></rect><path d="M10 20.25l15.105 9.5L40 20.25" fill="none" stroke="#000" stroke-width="3"></path></svg></span>
+                </a>
+              <a href="https://courses.fit.cvut.cz/BI-APS/projects/index.html">
+                  <span class="icon icon-folder"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="folder" width="50" height="50" fill="none"></rect><path d="M3.5 8.66v32.68h43V14.68H25l-4.3-6.02H3.5z" fill="none" stroke="#000" stroke-width="3"></path></svg></span> <span class="label">Semestrální práce</span>
+              </a>
+                  <ul>
+                        <li class="selected">
+                          <a href="https://courses.fit.cvut.cz/BI-APS/projects/01/index.html">
+                              <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">Semestrální práce č.1: Návrh mikroarchitektury jednocyklového procesoru</span>
+                          </a>
+                        </li>
+                        <li class="collapsed">
+                          <a href="https://courses.fit.cvut.cz/BI-APS/projects/02/index.html">
+                              <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">Semestrální práce č.2: Cache</span>
+                          </a>
+                        </li>
+                        <li class="collapsed">
+                          <a href="https://courses.fit.cvut.cz/BI-APS/projects/03/index.html">
+                              <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">x Bonusový úkol: Syntéza navržené mikroarchitektury do FPGA</span>
+                          </a>
+                        </li>
+                  </ul>
+            </li>
+            <li class="collapsed">
+              <a href="https://courses.fit.cvut.cz/BI-APS/teacher/index.html">
+                  <span class="icon icon-file-text"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" fill-rule="evenodd" clip-rule="evenodd" stroke-linecap="square" stroke-miterlimit="1.5"><rect id="file-text" width="50" height="50" fill="none"></rect><g fill="none" stroke="#000" stroke-width="3"><path d="M8.647 4.559v40.882h32.706V15.188L30.724 4.559H8.647z"></path><path d="M29.088 4.559v12.265h12.265"></path></g><g fill="none" stroke="#000" stroke-width="3"><path d="M14.371 38.082h17.17M14.371 32.359h8.585M14.371 26.635h13.9"></path></g></svg></span> <span class="label">Učitelé</span>
+              </a>
+            </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+<footer class="page-footer">
+  <div class="wrap">
+    <div class="meta">
+      <span class="doc-title">Semestrální práce č.1: Návrh mikroarchitektury jednocyklového procesoru</span>
+        <br>
+        <a href="https://gitlab.fit.cvut.cz/BI-APS/bi-aps/blob/master/projects/01/index.adoc" target="_blank">
+          projects/01/index.adoc</a>,
+        <a href="https://gitlab.fit.cvut.cz/BI-APS/bi-aps/commit/c6eede824887bf09fe4f5d4dcb26cb7a0e58ef33" target="_blank" title="Update index.adoc">
+          poslední změna c6eede82 (<time datetime="2024-10-22T07:44:40.000Z">22. 10. 2024 v&nbsp;9:44</time>, Michal Štepanovský)
+        </a>
+    </div>
+    <div class="coursepages">
+Vygenerováno programem         <a href="https://gitlab.fit.cvut.cz/course-pages/course-pages/" target="_blank"><strong>FIT CTU Course Pages</strong></a> v0.11.0
+      <br>
+      Stránka vygenerována <time datetime="2024-11-04T11:05:35.131Z">4. 11. 2024 ve&nbsp;12:05</time>
+    </div>
+      <div class="buildstatus">
+        <a href="https://gitlab.fit.cvut.cz/BI-APS/bi-aps/pipelines" target="_blank">
+          <img src="./aps_files/pipeline.svg" alt="Build status">
+        </a>
+      </div>
+  </div>
+</footer>
+  
+
+</body><app-ls-content ng-version="17.3.7"><template shadowrootmode="open"><!----><app-similar-tools _nghost-ng-c2697620354=""><!----><!----><!----></app-similar-tools><!----><!----><style>[_nghost-ng-c2697620354]{font-family:Open Sans,sans-serif;color:#121212}</style></template></app-ls-content></html>
